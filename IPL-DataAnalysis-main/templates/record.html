@@ -1,0 +1,203 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<title>Players Records</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+	<style>
+
+		.registration-form {
+			padding:50px 0;
+		}
+
+		.registration-form form {
+			max-width:800px;
+			padding:50px 70px;
+			border-radius:10px;
+			box-shadow:4px 4px 15px rgba(0, 0, 0, 0.2);
+			background-color:#fff;
+			margin: auto;
+		}
+
+		.registration-form form h3 {
+			font-weight:bold;
+			margin-bottom:30px;
+		}
+
+		.registration-form .item {
+			border-radius:10px;
+			margin-bottom:20px;
+			padding:3px 20px;
+			background: #dee2e6bf;
+		}
+
+		.registration-form .create-account {
+			border-radius:30px;
+			padding:10px 20px;
+			font-size:18px;
+			font-weight:bold;
+			background-color:#3445b4;
+			border:none;
+			color:white;
+			margin-top:20px;
+		}
+
+		.form-control::-webkit-input-placeholder {
+			color: #bbb;
+			font-size: 17px;
+		}
+
+		.form-control{
+			font-size: 18px;
+			border-color: #111;
+		}
+		@media (max-width: 576px) {
+			.registration-form form {
+				padding:50px 20px;
+				text-align: center;
+			}
+		}
+		.table{
+			font-family : inherit;
+		}
+		.table thead th{
+			background-color: #3445b4;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="wrapper d-flex align-items-stretch">
+		<!-- Page Navigation bar  -->
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+			<div class="p-4">
+
+				<h1><a href="{{ url_for('home') }}" class="logo">IPL Data Analysis & Prediction<span>(2008-2020)</span></a></h1>
+				
+				<ul class="list-unstyled components mb-5">
+
+					<li>
+						<a href="{{ url_for('home') }}"><span class="fa fa-home mr-3"></span>Home</a>
+					</li>
+
+					<li>
+						<a href="{{ url_for('data_analysis') }}"><span class="fa fa-bar-chart mr-3"></span>IPL Data Analysis</a>
+					</li>
+					
+					<li class="active">
+						<a href="{{ url_for('playersrecord') }}"><span class="fa fa-pie-chart mr-3"></span>Players Records</a>
+					</li>
+
+					<li>
+						<a href="https://ipl-winner-and-score-predictor.herokuapp.com/"><span class="fa fa-cogs mr-3"></span>IPL Winner & Score Predictor</a>
+					</li>
+
+				</ul>
+
+
+				<div class="footer text-center">
+					<p> 
+						<a  style="color: inherit;" target="_blank"href="https://github.com/Mann1904"><spam class="fa fa-github fa-lg contact-icon"></spam></a>
+
+						<a style="color: inherit;"target="_blank" href="https://www.linkedin.com/in/mann-saradva-aa37a0192/"><i class="fa fa-linkedin fa-lg contact-icon"></i></a>
+						<br>
+
+						<a>Made with ❤️ by Mann Saradva.</a>
+					</p>
+				</div>
+
+			</div>
+		</nav>
+
+
+			<!-- Page Content  -->
+			<div id="content" class="p-4 p-md-5 pt-5">
+				<h1 class="mb-4" style="text-align: center;">IPL Players Record</h1>
+				<hr style="border-top: 2px solid #111;">
+				<br>
+				<div class="registration-form">
+				
+					<form action="{{ url_for('ShowRecord') }}" method="POST" style="width: 90%;">
+						<h3 class="text-center">Players Record Search</h3>
+						<div class="form-group">
+							
+							<select class="form-control item" name="category" required>
+								<option value="none">  ---Select a Category---</option>
+								<option value="most-runs">Orange Cap / Most Runs</option>
+								<option value="most-wickets">Purple Cap / Most Wickets</option>
+								<option value="most-sixes">Most Sixes</option>
+								<option value="most-sixes-innings">Most Sixes(innings)</option>
+								<option value="highest-scores">Highest Scores</option>
+								<option value="best-batting-strike-rate">Best Batting Strike Rate</option>
+								<option value="best-batting-strike-rate-innings">Best Batting Strike Rate Innings</option>
+								<option value="best-batting-average">Best Batting Average</option>
+								<option value="most-fifties">Most Fifties</option>
+								<option value="most-centuries">Most Centuries</option>
+								<option value="most-fours">Most Fours</option>
+								<option value="fastest-fifties">Fastest Fifties</option>
+								<option value="fastest-centuries">Fastest Centuries</option>
+								<option value="best-bowling-innings">Best Bowling Figures</option>
+								<option value="best-bowling-average">Best Bowling Average</option>
+								<option value="best-bowling-economy">Best Economy Rates</option>
+								<option value="best-bowling-strike-rate-innings">Best Bowling Strike Rates Innings</option>
+								<option value="best-bowling-strike-rate">Best Bowling Strike Rates Tournament</option>
+								<option value="most-maidens">Most Numbers of Maiden Overs Bowled</option>
+								<option value="most-four-wickets">Most Four Wickets in an Innings</option>
+								<option value="most-runs-conceded-innings">Most Runs Conceded Innings</option>
+								<option value="hat-tricks-innings">Hat Tricks Innings</option>
+								<option value="most-hat-tricks">Most Hat Tricks</option>
+								<option value="most-dot-balls">Most Dot Balls Bowled(tournament)</option>
+							</select>
+							
+							<select class="form-control item" name="year" required>
+								<option value="none">  --- Select a Year ---</option>
+								<option value="all-time">ALL Time</option>
+								<option value="2008">2008</option>
+								<option value="2009">2009</option>
+								<option value="2010">2010</option>
+								<option value="2011">2011</option>
+								<option value="2012">2012</option>
+								<option value="2013">2013</option>
+								<option value="2014">2014</option>
+								<option value="2015">2015</option>
+								<option value="2016">2016</option>
+								<option value="2017">2017</option>
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+							</select>
+						<div class="form-group">
+							<input type="submit" class="btn btn-primary btn-block create-account" value="ShowRecord">
+						</div>
+					</form>
+				</div>
+			</div>	
+				<br>
+				<div id="content" class="p-4 p-md-4 pt-4">
+				<h2 class="text-center">{{name}}</h2>
+				<hr style="border-top: 1px solid #111;">
+				<br>
+				{{data|safe}}
+			</div>
+			</div>
+			
+			
+			<script type="text/javascript" language="javascript"  src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+			<script  type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/main.js') }}" ></script>
+			<script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/popper.js') }}"></script>
+			<script type="text/javascript" language="javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+			
+		</body>
+		</html>
